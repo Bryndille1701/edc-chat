@@ -2,7 +2,7 @@
 
 class Database
 {
-  protected $pdo;
+  public $pdo;
 
   public function __construct($hostname, $port_number, $username_db, $password_db, $db_name)
   {
@@ -14,19 +14,6 @@ class Database
     }
     catch (PDOException $e) {
       echo "error " . $e->getMessage();
-    }
-  }
-
-  public function getUsers() {
-    $query = $this->pdo->prepare('SELECT * FROM user');
-    try {
-      $query->execute();
-      $result = $query->fetchAll(PDO::FETCH_FUNC, 'User::buildFromPDO');
-      return $result;
-    }
-    catch (PDOException $exception) {
-      echo $exception->getMessage();
-      exit();
     }
   }
 }
